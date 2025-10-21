@@ -1,0 +1,474 @@
+{
+  "datasets": [
+    {
+      "name": "6de6f8fd",
+      "displayName": "Untitled dataset",
+      "queryLines": [
+        "USE CATALOG `workspace`;\n",
+        "USE SCHEMA `default`;\n",
+        "\n",
+        "-- Bitcoin latest price\n",
+        "SELECT current_price \n",
+        "FROM crypto_lag_features \n",
+        "WHERE symbol = 'B BTC-USD' \n",
+        "ORDER BY scrape_date DESC LIMIT 1;"
+      ]
+    },
+    {
+      "name": "d83b32cd",
+      "displayName": "Untitled dataset",
+      "queryLines": [
+        "USE CATALOG `workspace`;\n",
+        "USE SCHEMA `default`;\n",
+        "\n",
+        "-- Ethereum latest price\n",
+        "SELECT current_price \n",
+        "FROM crypto_lag_features \n",
+        "WHERE symbol = 'E ETH-USD' \n",
+        "ORDER BY scrape_date DESC LIMIT 1;"
+      ]
+    },
+    {
+      "name": "9b1e53a4",
+      "displayName": "Untitled dataset",
+      "queryLines": [
+        "USE CATALOG `workspace`;\n",
+        "USE SCHEMA `default`;\n",
+        "\n",
+        "-- Sol latest price\n",
+        "SELECT current_price \n",
+        "FROM crypto_lag_features \n",
+        "WHERE symbol = 'S SOL-USD' \n",
+        "ORDER BY scrape_date DESC LIMIT 1;"
+      ]
+    },
+    {
+      "name": "ded4c1bc",
+      "displayName": "Untitled dataset",
+      "queryLines": [
+        "USE CATALOG `workspace`;\n",
+        "USE SCHEMA `default`;\n",
+        "\n",
+        "\n",
+        "-- BTC change since latest data:\n",
+        "SELECT pct_change_1d \n",
+        "FROM crypto_lag_features \n",
+        "WHERE symbol = 'B BTC-USD' \n",
+        "ORDER BY scrape_date DESC LIMIT 1;"
+      ]
+    },
+    {
+      "name": "62ffaaac",
+      "displayName": "Untitled dataset",
+      "queryLines": [
+        "USE CATALOG `workspace`;\n",
+        "USE SCHEMA `default`;\n",
+        "\n",
+        "-- Volatility (How turbulent the market has been over the past x hours)\n",
+        "SELECT ROUND(AVG(volatility_pct),2) as avg_volatility\n",
+        "FROM crypto_lag_features \n",
+        "WHERE scrape_date = (SELECT MAX(scrape_date) FROM crypto_lag_features);\n"
+      ]
+    },
+    {
+      "name": "fea95c59",
+      "displayName": "Untitled dataset",
+      "queryLines": [
+        "USE CATALOG `workspace`;\n",
+        "USE SCHEMA `default`;\n",
+        "\n",
+        "--------------- Price trend line chart ----------------\n",
+        "SELECT scrape_date, symbol, price\n",
+        "FROM historical_crypto_trends\n",
+        "where symbol = \"B BTC-USD\"\n",
+        "--WHERE symbol IN ('B BTC-USD', 'E ETH-USD', 'S SOL-USD')\n",
+        "ORDER BY scrape_date ASC;\n",
+        "\n"
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "name": "e49a773f",
+      "displayName": "Crypto Market Trends",
+      "layout": [
+        {
+          "widget": {
+            "name": "e60c0206",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "6de6f8fd",
+                  "fields": [
+                    {
+                      "name": "current_price",
+                      "expression": "`current_price`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "current_price",
+                  "format": {
+                    "type": "number-plain",
+                    "abbreviation": "none",
+                    "decimalPlaces": {
+                      "type": "exact",
+                      "places": 2
+                    }
+                  },
+                  "rowNumber": 1
+                }
+              },
+              "frame": {
+                "title": "Visualization 1",
+                "showTitle": false,
+                "description": "Bitcoin (BTC) Current Price",
+                "showDescription": true
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 2,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "69ecdc2d",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "d83b32cd",
+                  "fields": [
+                    {
+                      "name": "current_price",
+                      "expression": "`current_price`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "current_price",
+                  "format": {
+                    "type": "number-plain",
+                    "abbreviation": "none",
+                    "decimalPlaces": {
+                      "type": "exact",
+                      "places": 2
+                    }
+                  },
+                  "rowNumber": 1
+                }
+              },
+              "frame": {
+                "title": "Visualization 1",
+                "showTitle": false,
+                "description": "Ethereum (ETH) Current Price",
+                "showDescription": true
+              }
+            }
+          },
+          "position": {
+            "x": 2,
+            "y": 0,
+            "width": 2,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "fa6f907a",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "9b1e53a4",
+                  "fields": [
+                    {
+                      "name": "current_price",
+                      "expression": "`current_price`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "current_price",
+                  "format": {
+                    "type": "number-plain",
+                    "abbreviation": "none",
+                    "decimalPlaces": {
+                      "type": "exact",
+                      "places": 2
+                    }
+                  },
+                  "rowNumber": 1
+                }
+              },
+              "frame": {
+                "title": "Visualization 1",
+                "showTitle": false,
+                "description": "Current Sol Price",
+                "showDescription": true
+              }
+            }
+          },
+          "position": {
+            "x": 4,
+            "y": 0,
+            "width": 2,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "374e2591",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "ded4c1bc",
+                  "fields": [
+                    {
+                      "name": "pct_change_1d",
+                      "expression": "`pct_change_1d`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "pct_change_1d",
+                  "format": {
+                    "type": "number-plain",
+                    "abbreviation": "none",
+                    "decimalPlaces": {
+                      "type": "exact",
+                      "places": 4
+                    }
+                  },
+                  "rowNumber": 1
+                }
+              },
+              "frame": {
+                "title": "Visualization 1",
+                "showTitle": false,
+                "description": "Bitcoin (BTC) Change in Price %",
+                "showDescription": true
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 9,
+            "width": 2,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "546a9863",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "62ffaaac",
+                  "fields": [
+                    {
+                      "name": "avg_volatility",
+                      "expression": "`avg_volatility`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "avg_volatility",
+                  "format": {
+                    "type": "number-plain",
+                    "abbreviation": "none",
+                    "decimalPlaces": {
+                      "type": "exact",
+                      "places": 3
+                    }
+                  },
+                  "rowNumber": 1
+                }
+              },
+              "frame": {
+                "title": "Visualization 1",
+                "showTitle": false,
+                "description": "Average Volatility of last 12 hours",
+                "showDescription": true
+              }
+            }
+          },
+          "position": {
+            "x": 4,
+            "y": 9,
+            "width": 2,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "7b23a670",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "fea95c59",
+                  "fields": [
+                    {
+                      "name": "symbol",
+                      "expression": "`symbol`"
+                    },
+                    {
+                      "name": "scrape_date",
+                      "expression": "`scrape_date`"
+                    },
+                    {
+                      "name": "sum(price)",
+                      "expression": "SUM(`price`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "line",
+              "encodings": {
+                "x": {
+                  "fieldName": "scrape_date",
+                  "scale": {
+                    "type": "categorical"
+                  },
+                  "axis": {
+                    "title": "Date",
+                    "labelAngle": 0,
+                    "hideLabels": true
+                  },
+                  "displayName": "Date"
+                },
+                "y": {
+                  "fieldName": "sum(price)",
+                  "scale": {
+                    "type": "quantitative"
+                  },
+                  "axis": {
+                    "title": "BTC Price"
+                  },
+                  "displayName": "price"
+                },
+                "color": {
+                  "fieldName": "symbol",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                }
+              },
+              "frame": {
+                "title": "Currennt BTC Price Over Time",
+                "showTitle": true
+              },
+              "mark": {
+                "layout": "layer"
+              }
+            }
+          },
+          "position": {
+            "x": 1,
+            "y": 2,
+            "width": 4,
+            "height": 7
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS"
+    },
+    {
+      "name": "993c8e17",
+      "displayName": "Global Filters",
+      "layout": [
+        {
+          "widget": {
+            "name": "fc0db230",
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-single-select",
+              "encodings": {},
+              "frame": {
+                "showTitle": true
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 2,
+            "width": 1,
+            "height": 2
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_GLOBAL_FILTERS"
+    }
+  ],
+  "uiSettings": {
+    "theme": {
+      "canvasBackgroundColor": {
+        "light": "#FAFAFB",
+        "dark": "#1F272D"
+      },
+      "widgetBackgroundColor": {
+        "light": "#FFFFFF",
+        "dark": "#11171C"
+      },
+      "fontColor": {
+        "light": "#11171C",
+        "dark": "#FFFFFF"
+      },
+      "selectionColor": {
+        "light": "#FFFFFF",
+        "dark": "#8ACAFF"
+      },
+      "widgetHeaderAlignment": "CENTER"
+    },
+    "genieSpace": {
+      "isEnabled": false
+    }
+  }
+}
