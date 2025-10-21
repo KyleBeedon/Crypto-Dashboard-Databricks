@@ -2,7 +2,7 @@
 ## Overview  
 This project wasn’t part of any class or assignment, I built it entirely for myself to improve my understanding of working within the Databricks framework and Apache Spark. 
 
-I’ve used web scraping before (usually with pandas.read_html() when extracting tables from websites), but I wanted to go further this time — specifically, to automate the process so it could run on its own without manual intervention.
+I’ve used web scraping before (usually with pandas.read_html() when extracting tables from websites), but I wanted to go further this time, specifically, to automate the process so it could run on its own without manual intervention.
 
 The data source itself wasn’t the main focus, but I decided to use cryptocurrency data because it’s dynamic, interesting, and something I wanted to learn more about along the way.
 
