@@ -8,15 +8,15 @@ The data source itself wasn’t the main focus, but I decided to use cryptocurre
 
 ## Tools & Technologies
 
-**Databricks** (for orchestration, scheduling, and SQL queries)
+- Databricks (for orchestration, scheduling, and SQL queries)
 
-**Apache Spark** (for distributed data handling)
+- Apache Spark (for distributed data handling)
 
-**Python** (for web scraping and ETL logic)
+- Python (for web scraping and ETL logic)
 
-**SQL** (for dashboard-ready transformations)
+- SQL (for dashboard-ready transformations)
 
-**Yahoo Finance** (as the data source)
+- Yahoo Finance (as the data source)
 
 ## Project Workflow
 1. Automated Web Scraping
@@ -32,7 +32,8 @@ The script cleans and stores the data into a historical Databricks table named h
 - market_cap  
 - volume  
 - circulating_supply  
-- scrape_date  
+- scrape_date
+
 Each new run appends fresh data, creating a continuously growing historical record.
 
 2. Data Transformation (SQL)
@@ -41,7 +42,8 @@ Once the historical table was established, I wrote a series of SQL queries to ex
 - The current price of each cryptocurrency  
 - The price during the last few scrapes  
 - Percent changes and ranking by volume or market cap  
-- These queries were organized and stored inside a folder called Dashboard_queries.  
+
+These queries were organized and stored inside a folder called Dashboard_queries.  
 
 3. Dashboard Query Automation
 
@@ -55,7 +57,8 @@ Finally, I built a Databricks dashboard that displays:
 - The current prices of top cryptos like BTC, ETH, and SOL  
 - A time-series graph showing BTC’s price trend over time  
 - Summary metrics highlighting changes and rankings  
--  After configuring job sequencing in Databricks, the process runs automatically from data collection to dashboard refresh.
+
+After configuring job sequencing in Databricks, the process runs automatically from data collection to dashboard refresh.
 
 ## Results
 
@@ -63,7 +66,8 @@ By the end of the project, I achieved a fully automated data pipeline that:
 - Scrapes live crypto data from Yahoo Finance  
 - Stores it in a historical table  
 - Runs multiple SQL transformations  
--  Updates a Databricks dashboard automatically  
+- Updates a Databricks dashboard automatically
+
 While the dashboard itself isn’t the flashiest, this project was a personal success, it helped me strengthen my understanding of Databricks, Spark, and automation pipelines.
 
 ## Future Improvements
